@@ -1,0 +1,487 @@
+{
+    "document": {
+        "pages": [
+            {
+                "page_number": 1,
+                "elements": [
+                    {
+                        "type": "table",
+                        "rows": [
+                            [
+                                {
+                                    "text": "SOUTHERN POWER DISTRIBUTION COMPANY OF TG LIMITED H.T C.C. Bill for the Month of October 2024, Date: 01-Nov-24 PAYABLE ON OR BEFORE Dated : 15-Nov-24 DISCONNECTION DATE: 30-Nov-24",
+                                    "rowspan": null,
+                                    "colspan": "14"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": "5",
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "Contracted MD (KVA/HP)",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "125",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "Consumer Number",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "CBC1855",
+                                    "rowspan": null,
+                                    "colspan": "4"
+                                },
+                                {
+                                    "text": "",
+                                    "rowspan": "6",
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Specified Voltage(KV)",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "11",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "Name",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "M/S.THE AKSHAYA PATRA FOUNDATION",
+                                    "rowspan": null,
+                                    "colspan": "4"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Actual Voltage(KV)",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "11",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "Address1",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "SYNO:172",
+                                    "rowspan": null,
+                                    "colspan": "4"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Feeder",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "165111140905 ( CF )",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "Address2",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "NARSINGI",
+                                    "rowspan": null,
+                                    "colspan": "4"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Category",
+                                    "rowspan": "2",
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "7",
+                                    "rowspan": "24",
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "Address3",
+                                    "rowspan": "24",
+                                    "colspan": "3"
+                                },
+                                {
+                                    "text": "NARSINGI",
+                                    "rowspan": "24",
+                                    "colspan": "4"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": "8",
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "DESCRIPTIONS",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "KWH",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "KVAH",
+                                    "rowspan": "9",
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Reading On 31-OCT-24",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "377700.70",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Reading On 01-OCT-24",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "371630.90",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Difference ST:01",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "6069.8",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Multiplying Factor",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "2",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Total Consumption",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "12140",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Monthly Minimum Units",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "0",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Main Consumption",
+                                    "rowspan": "2",
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "12272",
+                                    "rowspan": "15",
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": "12",
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "DESCRIPTIONS",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "RATE",
+                                    "rowspan": "13",
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Demand Charges Normal",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Demand Charges Penal",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Energy Charges",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Incentive TOD1",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Incentive TOD2",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "TOD Charges",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Electricity Duty",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Colony Charges",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "L&F Charges",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Green Energy Charges",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "FSA Charges",
+                                    "rowspan": "2",
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            },
+            {
+                "page_number": 2,
+                "elements": [
+                    {
+                        "type": "table",
+                        "rows": [
+                            [
+                                {
+                                    "text": "Net Meter (KWH) Details",
+                                    "rowspan": null,
+                                    "colspan": "3"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Closing Reading",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "Opening Reading",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "Recorded Units",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "15498.85",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "15225.65",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "546",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ]
+                        ]
+                    },
+                    {
+                        "type": "table",
+                        "rows": [
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                },
+                                {
+                                    "text": "",
+                                    "rowspan": "6",
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Arrears as on 31/10/24",
+                                    "rowspan": null,
+                                    "colspan": "2"
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "C.C.Charge",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Court Case Rs.",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "0",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Others Rs.",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "0",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ],
+                            [
+                                {
+                                    "text": "Total Rs.",
+                                    "rowspan": null,
+                                    "colspan": null
+                                },
+                                {
+                                    "text": "0",
+                                    "rowspan": null,
+                                    "colspan": null
+                                }
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

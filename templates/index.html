@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,29 +13,47 @@
     <style>
         .split-uploads {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr;
             gap: 15px;
+            transition: all 0.3s ease;
         }
+
+        .split-uploads.show-template {
+            grid-template-columns: 1fr 1fr;
+        }
+
         @media (max-width: 500px) {
-            .split-uploads { grid-template-columns: 1fr; }
+            .split-uploads.show-template {
+                grid-template-columns: 1fr;
+            }
         }
+
+        .action-buttons button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .action-buttons {
             display: flex;
             gap: 10px;
             margin-top: 5px;
         }
+
         .action-buttons button {
             flex: 1;
             padding: 14px;
         }
+
         .single-download {
             grid-template-columns: 1fr !important;
         }
+
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-main);
         }
+
         .btn-secondary:hover:not(:disabled) {
             background: rgba(255, 255, 255, 0.15);
             border-color: rgba(255, 255, 255, 0.3);
@@ -42,17 +61,18 @@
         }
     </style>
 </head>
+
 <body>
     <div class="blob blob-1"></div>
     <div class="blob blob-2"></div>
-    
+
     <div class="glass-container">
         <div class="header">
             <div class="logo-icon"><i class="fa-solid fa-file-excel"></i></div>
             <h1>Nexus Extract</h1>
             <p>Next-Generation PDF Data Extraction</p>
         </div>
-        
+
         <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
             <div class="split-uploads">
                 <!-- PDF Upload -->
@@ -60,13 +80,13 @@
                     <input type="file" id="pdfFile" name="pdf" accept=".pdf" required>
                     <div class="upload-area" id="pdfArea">
                         <i class="fa-solid fa-cloud-arrow-up"></i>
-                        <h3>1. Upload PDF</h3>
+                        <h3>Upload PDF</h3>
                         <p>Source Data</p>
                     </div>
                 </div>
 
                 <!-- Template Upload -->
-                <div class="file-upload-wrapper" id="templateWrapper">
+                <div class="file-upload-wrapper" id="templateWrapper" style="display: none;">
                     <input type="file" id="templateFile" name="template" accept=".xlsx">
                     <div class="upload-area" id="templateArea">
                         <i class="fa-solid fa-table"></i>
@@ -77,10 +97,11 @@
             </div>
 
             <div class="action-buttons">
-                <button type="button" id="btnSpecific" class="premium-btn btn-secondary" onclick="submitForm('specific')">
-                    <span>Extract Specific</span> <i class="fa-solid fa-table"></i>
+                <button type="button" id="btnSpecific" class="premium-btn btn-secondary"
+                    onclick="submitForm('specific')" disabled>
+                    <span>Extract Based on Template</span> <i class="fa-solid fa-table"></i>
                 </button>
-                <button type="button" id="btnAll" class="premium-btn" onclick="submitForm('all')">
+                <button type="button" id="btnAll" class="premium-btn" onclick="submitForm('all')" disabled>
                     <span>Extract Full PDF</span> <i class="fa-solid fa-sheet-plastic"></i>
                 </button>
             </div>
@@ -101,7 +122,7 @@
                 <i class="fa-solid fa-circle-check"></i>
                 <span>Extraction Complete!</span>
             </div>
-            
+
             <div class="download-grid single-download">
                 <a href="#" id="downloadFinalBtn" class="btn-download btn-primary" style="justify-content: center;">
                     <i class="fa-solid fa-download"></i>
@@ -111,19 +132,19 @@
                     </div>
                 </a>
             </div>
-            
+
             <button onclick="location.reload()" class="reset-btn" style="margin: 0 auto;">
-                <i class="fa-solid fa-rotate-right"></i> Extract Another File
+                <i class="fa-solid fa-rotate-right"></i> Back To Home
             </button>
         </div>
     </div>
-    
+
     <script>
         // Setup visual feedback for file inputs
         function setupUploadArea(inputId, areaId, iconClass, successColor) {
             const input = document.getElementById(inputId);
             const area = document.getElementById(areaId);
-            
+
             input.addEventListener('change', (e) => {
                 if (e.target.files.length > 0) {
                     const fileName = e.target.files[0].name;
@@ -131,6 +152,16 @@
                                       <h3 style="color: #fff; font-size: 0.95rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 90%; text-align: center;">${fileName}</h3>
                                       <p>Ready</p>`;
                     area.classList.add('active');
+
+                    if (inputId === 'pdfFile') {
+                        document.getElementById('btnSpecific').disabled = false;
+                        document.getElementById('btnAll').disabled = false;
+                    }
+
+                    if (inputId === 'templateFile') {
+                        document.getElementById('templateWrapper').style.display = 'block';
+                        document.querySelector('.split-uploads').classList.add('show-template');
+                    }
                 }
             });
 
@@ -156,11 +187,22 @@
             const templateFile = document.getElementById('templateFile').files[0];
 
             if (!pdfFile) { alert("Please upload a PDF file first."); return; }
-            if (formatType === 'specific' && !templateFile) { alert("An Excel Template file is required for Specific Extraction."); return; }
+
+            if (formatType === 'specific' && !templateFile) {
+                const templateInput = document.getElementById('templateFile');
+                templateInput.click();
+
+                templateInput.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        setTimeout(() => submitForm('specific'), 100);
+                    }
+                }, { once: true });
+                return;
+            }
 
             btnSpecific.disabled = true;
             btnAll.disabled = true;
-            
+
             if (formatType === 'specific') {
                 btnSpecific.innerHTML = `<span>Processing...</span> <i class="fa-solid fa-circle-notch fa-spin"></i>`;
             } else {
@@ -193,9 +235,9 @@
                         if (progData.status === 'completed') {
                             clearInterval(pollInterval);
                             progressMessage.textContent = 'Extraction finished seamlessly.';
-                            
+
                             document.getElementById('downloadFinalBtn').href = progData.excel_url;
-                            
+
                             document.getElementById('uploadForm').style.display = 'none';
                             downloadContainer.style.display = 'flex';
                             progressContainer.style.display = 'none';
@@ -216,11 +258,12 @@
             function resetUI() {
                 btnSpecific.disabled = false;
                 btnAll.disabled = false;
-                btnSpecific.innerHTML = `<span>Extract Specific</span> <i class="fa-solid fa-table"></i>`;
+                btnSpecific.innerHTML = `<span>Extract Based on Template</span> <i class="fa-solid fa-table"></i>`;
                 btnAll.innerHTML = `<span>Extract Full PDF</span> <i class="fa-solid fa-sheet-plastic"></i>`;
                 progressContainer.style.display = 'none';
             }
         }
     </script>
 </body>
+
 </html>
