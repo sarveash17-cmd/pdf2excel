@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Extract | PDF to Excel</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .split-uploads {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        @media (max-width: 500px) {
+            .split-uploads { grid-template-columns: 1fr; }
+        }
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .action-buttons button {
+            flex: 1;
+            padding: 14px;
+        }
+        .single-download {
+            grid-template-columns: 1fr !important;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+        }
+        .btn-secondary:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="glass-container">
+        <div class="header">
+            <div class="logo-icon"><i class="fa-solid fa-file-excel"></i></div>
+            <h1>Nexus Extract</h1>
+            <p>Next-Generation PDF Data Extraction</p>
+        </div>
+        
+        <form class="upload-form" id="uploadForm" enctype="multipart/form-data">
+            <div class="split-uploads">
+                <!-- PDF Upload -->
+                <div class="file-upload-wrapper" id="pdfWrapper">
+                    <input type="file" id="pdfFile" name="pdf" accept=".pdf" required>
+                    <div class="upload-area" id="pdfArea">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <h3>1. Upload PDF</h3>
+                        <p>Source Data</p>
+                    </div>
+                </div>
+
+                <!-- Template Upload -->
+                <div class="file-upload-wrapper" id="templateWrapper">
+                    <input type="file" id="templateFile" name="template" accept=".xlsx">
+                    <div class="upload-area" id="templateArea">
+                        <i class="fa-solid fa-table"></i>
+                        <h3>2. Upload Template</h3>
+                        <p>(For Specific Extract Only)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button type="button" id="btnSpecific" class="premium-btn btn-secondary" onclick="submitForm('specific')">
+                    <span>Extract Specific</span> <i class="fa-solid fa-table"></i>
+                </button>
+                <button type="button" id="btnAll" class="premium-btn" onclick="submitForm('all')">
+                    <span>Extract Full PDF</span> <i class="fa-solid fa-sheet-plastic"></i>
+                </button>
+            </div>
+        </form>
+
+        <div class="progress-section" id="progressContainer">
+            <div class="progress-bar-glow">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-status">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+                <span id="progressMessage">Initializing quantum extraction...</span>
+            </div>
+        </div>
+
+        <div id="downloadContainer" class="download-section">
+            <div class="success-alert">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Extraction Complete!</span>
+            </div>
+            
+            <div class="download-grid single-download">
+                <a href="#" id="downloadFinalBtn" class="btn-download btn-primary" style="justify-content: center;">
+                    <i class="fa-solid fa-download"></i>
+                    <div class="btn-content" style="text-align: center;">
+                        <strong>Download Ready</strong>
+                        <span>Click to save your Excel file</span>
+                    </div>
+                </a>
+            </div>
+            
+            <button onclick="location.reload()" class="reset-btn" style="margin: 0 auto;">
+                <i class="fa-solid fa-rotate-right"></i> Extract Another File
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Setup visual feedback for file inputs
+        function setupUploadArea(inputId, areaId, iconClass, successColor) {
+            const input = document.getElementById(inputId);
+            const area = document.getElementById(areaId);
+            
+            input.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const fileName = e.target.files[0].name;
+                    area.innerHTML = `<i class="${iconClass}" style="color: ${successColor};"></i>
+                                      <h3 style="color: #fff; font-size: 0.95rem; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; width: 90%; text-align: center;">${fileName}</h3>
+                                      <p>Ready</p>`;
+                    area.classList.add('active');
+                }
+            });
+
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => area.addEventListener(eventName, preventDefaults, false));
+            ['dragenter', 'dragover'].forEach(eventName => area.addEventListener(eventName, () => area.classList.add('highlight'), false));
+            ['dragleave', 'drop'].forEach(eventName => area.addEventListener(eventName, () => area.classList.remove('highlight'), false));
+        }
+
+        function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+
+        setupUploadArea('pdfFile', 'pdfArea', 'fa-solid fa-file-pdf', '#ff4757');
+        setupUploadArea('templateFile', 'templateArea', 'fa-solid fa-file-excel', '#2ed573');
+
+        async function submitForm(formatType) {
+            const btnSpecific = document.getElementById('btnSpecific');
+            const btnAll = document.getElementById('btnAll');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressFill = document.getElementById('progressFill');
+            const progressMessage = document.getElementById('progressMessage');
+            const downloadContainer = document.getElementById('downloadContainer');
+
+            const pdfFile = document.getElementById('pdfFile').files[0];
+            const templateFile = document.getElementById('templateFile').files[0];
+
+            if (!pdfFile) { alert("Please upload a PDF file first."); return; }
+            if (formatType === 'specific' && !templateFile) { alert("An Excel Template file is required for Specific Extraction."); return; }
+
+            btnSpecific.disabled = true;
+            btnAll.disabled = true;
+            
+            if (formatType === 'specific') {
+                btnSpecific.innerHTML = `<span>Processing...</span> <i class="fa-solid fa-circle-notch fa-spin"></i>`;
+            } else {
+                btnAll.innerHTML = `<span>Processing...</span> <i class="fa-solid fa-circle-notch fa-spin"></i>`;
+            }
+
+            progressContainer.style.display = 'block';
+            downloadContainer.style.display = 'none';
+            progressFill.style.width = '0%';
+
+            const formData = new FormData();
+            formData.append('pdf', pdfFile);
+            if (templateFile) formData.append('template', templateFile);
+            formData.append('format_type', formatType);
+
+            try {
+                const response = await fetch('/convert', { method: 'POST', body: formData });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.message || 'Upload failed');
+
+                const jobId = data.job_id;
+                const pollInterval = setInterval(async () => {
+                    try {
+                        const progResp = await fetch(`/progress/${jobId}`);
+                        const progData = await progResp.json();
+
+                        progressFill.style.width = progData.progress + '%';
+                        progressMessage.textContent = progData.message;
+
+                        if (progData.status === 'completed') {
+                            clearInterval(pollInterval);
+                            progressMessage.textContent = 'Extraction finished seamlessly.';
+                            
+                            document.getElementById('downloadFinalBtn').href = progData.excel_url;
+                            
+                            document.getElementById('uploadForm').style.display = 'none';
+                            downloadContainer.style.display = 'flex';
+                            progressContainer.style.display = 'none';
+                        } else if (progData.status === 'error') {
+                            clearInterval(pollInterval);
+                            alert('Extraction Error: ' + (progData.error || progData.message));
+                            resetUI();
+                        }
+                    } catch (err) {
+                        console.error('Polling error:', err);
+                    }
+                }, 500);
+            } catch (error) {
+                alert(error.message);
+                resetUI();
+            }
+
+            function resetUI() {
+                btnSpecific.disabled = false;
+                btnAll.disabled = false;
+                btnSpecific.innerHTML = `<span>Extract Specific</span> <i class="fa-solid fa-table"></i>`;
+                btnAll.innerHTML = `<span>Extract Full PDF</span> <i class="fa-solid fa-sheet-plastic"></i>`;
+                progressContainer.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
